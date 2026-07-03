@@ -150,16 +150,14 @@ function HeroSection() {
                 View Github
               </a>
             </Magnetic>
-            <a href="https://drive.google.com/file/d/1G7VOQYtPcM7bDX7o9fOWacIaGZLJzK7P/view?usp=sharing"
-              className="text-sm text-white/40 hover:text-white/70 cursor-pointer transition-colors inline-flex items-center gap-2"
-            >
-              View CV
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-            </a>
+            <a
+                href="https://drive.google.com/file/d/1G7VOQYtPcM7bDX7o9fOWacIaGZLJzK7P/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-20 inline-block bg-[#7F77DD] text-white text-sm font-medium px-7 py-3.5 rounded-full hover:bg-[#6b63c9] transition-colors duration-200"
+              >
+                View Github
+              </a>
           </motion.div>
         </div>
 
