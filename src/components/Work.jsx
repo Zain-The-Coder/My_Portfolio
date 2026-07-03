@@ -24,7 +24,7 @@ const PROJECTS = [
     accent: '#1D9E75',
     bg: '#0a1a16',
     label: 'Banking Transaction System',
-    src: '/public/images/apex-wallet-thumbnail.png',
+    src: '/images/apex-wallet-thumbnail.png',
     stats: [
       { label: 'Live Demo', value: 'Live Demo', icon: HiOutlineExternalLink, link: 'https://apex-wallet-frontend.vercel.app/' },
       { label: 'Frontend GitHub', value: 'Frontend GitHub', icon: AiFillGithub, link: 'https://github.com/Zain-The-Coder/Apex_Wallet_frontend' },
