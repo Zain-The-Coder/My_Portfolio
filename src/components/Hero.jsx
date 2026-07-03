@@ -173,7 +173,7 @@ function HeroSection() {
             <div className="flex items-center gap-4 mb-8">
               <div className="relative">
                 <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center bg-white/5">
-                  <img src="/public/images/myphoto.png" alt="Zain Ur Rehman" className="w-full h-full object-cover" />
+                  <img src="/images/myphoto.png" alt="Zain Ur Rehman" className="w-full h-full object-cover" />
                 </div>
                 <span className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-[#1D9E75] border-2 border-[#0d0d0d]" />
               </div>
