@@ -38,7 +38,7 @@ const PROJECTS = [
     accent: '#1D9E75',
     bg: '#0a1a16',
     label: 'Song Application',
-    src: '/public/images/sonic-stream.png',
+    src: '/images/sonic-stream.png',
     stats: [
       { label: 'Live Demo', value: 'Live Demo', icon: HiOutlineExternalLink, link: 'https://sonic-stream-pi.vercel.app/' },
       { label: 'Frontend GitHub', value: 'Frontend GitHub', icon: AiFillGithub, link: 'https://github.com/Zain-The-Coder/SonicStream' },
@@ -52,7 +52,7 @@ const PROJECTS = [
     accent: '#1D9E75',
     bg: '#0a1a16',
     label: 'E Commerce Platform',
-    src: '/public/images/nn-tech.png',
+    src: '/images/nn-tech.png',
     stats: [
       { label: 'Live Demo', value: 'Live Demo', icon: HiOutlineExternalLink, link: 'https://nn-tech.vercel.app/' },
       { label: 'Github', value: 'Github', icon: AiFillGithub, link: 'https://github.com/Zain-The-Coder/NN_Tech' },
@@ -64,7 +64,7 @@ const PROJECTS = [
     tags: ['Next JS', 'Next Auth', 'TypeScript', 'SupaBase', 'Prisma', 'TailwindCss'],
     accent: '#1D9E75',
     label: 'Hospital Management System',
-    src: '/public/images/med-connect.png',
+    src: '/images/med-connect.png',
     bg: '#0a1a12',
     stats: [
       { label: 'Live Demo', value: 'Live Demo', icon: HiOutlineExternalLink, link: 'https://med-connect-zeta.vercel.app/' },
@@ -78,7 +78,7 @@ const PROJECTS = [
     accent: '#1D9E75',
     bg: '#0a1a12',
     label: 'Problem Solving Platform',
-    src: '/public/images/help-hub.png',
+    src: '/images/help-hub.png',
     stats: [
       { label: 'Live Demo', value: 'Live Demo', icon: HiOutlineExternalLink, link: 'https://the-final-hackathon.vercel.app/' },
       { label: 'Github', value: 'Github', icon: AiFillGithub, link: 'https://github.com/Zain-The-Coder/The-Final_hackathon' },
@@ -90,7 +90,7 @@ const PROJECTS = [
     tags: ['React.JS', 'TailwindCss', 'FireBase'],
     accent: '#1D9E75',
     label: 'E Commerce Store',
-    src: '/public/images/daraz.png',
+    src: '/images/daraz.png',
     bg: '#0a1a12',
     stats: [
       { label: 'Live Demo', value: 'Live Demo', icon: HiOutlineExternalLink, link: 'https://darazcloone.netlify.app/' },
@@ -104,7 +104,7 @@ const PROJECTS = [
     accent: '#1D9E75',
     bg: '#0a1a12',
     label: 'Chat application',
-    src: '/public/images/messanger.png',
+    src: '/images/messanger.png',
     featured: true,
     stats: [
       { label: 'Live Demo', value: 'Live Demo', icon: HiOutlineExternalLink, link: 'https://worldmesanger.netlify.app/' },

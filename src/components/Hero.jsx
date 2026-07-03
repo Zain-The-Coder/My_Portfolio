@@ -4,7 +4,7 @@ import { motion  , AnimatePresence} from "framer-motion";
 const downloadCV = () => {
   console.log("function fire")
   const link = document.createElement('a');
-  link.href = '/public/zain-cv.docx'; 
+  link.href = '/zain-cv.docx'; 
   link.download = 'Zain_Ur_Rehman_CV.docx';
   document.body.appendChild(link);
   link.click();
