@@ -156,7 +156,7 @@ function HeroSection() {
                 rel="noopener noreferrer"
                 className="relative z-20 inline-block bg-[#7F77DD] text-white text-sm font-medium px-7 py-3.5 rounded-full hover:bg-[#6b63c9] transition-colors duration-200"
               >
-                View Github
+                View CV
               </a>
           </motion.div>
         </div>
