@@ -108,7 +108,6 @@ export default function AddProjectPage() {
                 maxLength={4}
               />
               {errors.secret && <p className="text-red-400 text-xs mt-1">{errors.secret.message}</p>}
-              <p className="text-xs text-red-400/70 mt-2">Hint: Use the frontend PIN (9509) to pass the UX gate. The backend will verify it against ADD_PROJECT_SECRET.</p>
             </div>
 
             <div className="space-y-4">
