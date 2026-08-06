@@ -27,6 +27,8 @@ export async function POST(req: Request) {
       stack, 
       liveUrl, 
       githubUrl, 
+      frontendRepoUrl,
+      backendRepoUrl,
       image, 
       category 
     } = body;
@@ -37,7 +39,7 @@ export async function POST(req: Request) {
     }
 
     // 2. Validate required fields
-    if (!title || !description || !stack || !liveUrl || !githubUrl || !category) {
+    if (!title || !description || !stack || !liveUrl || !category) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -56,6 +58,8 @@ export async function POST(req: Request) {
       stack: stackArray,
       liveUrl,
       githubUrl,
+      frontendRepoUrl,
+      backendRepoUrl,
       image: image || '/projects/placeholder.jpg',
       category,
     });

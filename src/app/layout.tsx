@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased selection:bg-primary-500/30 selection:text-primary-900 dark:selection:text-primary-100`}
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased selection:bg-primary-500/30 selection:text-primary-900 dark:selection:text-primary-100 relative`}
       >
         <ThemeProvider
           attribute="data-theme"

@@ -68,13 +68,28 @@ export default function ProjectsSection() {
                   
                   {/* <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110 z-10" /> */}
                   
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center gap-4">
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-primary-500 rounded-full text-white hover:bg-primary-600 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-75">
-                      <FiExternalLink size={20} />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-wrap items-center justify-center gap-3 p-4">
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-primary-500 rounded-full text-white text-sm font-medium hover:bg-primary-600 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-75">
+                      <FiExternalLink size={16} /> Live Demo
                     </a>
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-surface rounded-full text-foreground hover:bg-white/20 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-150">
-                      <FiGithub size={20} />
-                    </a>
+                    
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-full text-foreground text-sm font-medium hover:bg-white/20 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-100">
+                        <FiGithub size={16} /> GitHub
+                      </a>
+                    )}
+
+                    {project.frontendRepoUrl && (
+                      <a href={project.frontendRepoUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-full text-foreground text-sm font-medium hover:bg-white/20 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-125">
+                        <FiGithub size={16} /> Frontend Repo
+                      </a>
+                    )}
+
+                    {project.backendRepoUrl && (
+                      <a href={project.backendRepoUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-full text-foreground text-sm font-medium hover:bg-white/20 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-150">
+                        <FiGithub size={16} /> Backend Repo
+                      </a>
+                    )}
                   </div>
                 </div>
 

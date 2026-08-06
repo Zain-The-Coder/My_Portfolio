@@ -6,7 +6,9 @@ export interface IProject extends Document {
   description: string;
   stack: string[];
   liveUrl: string;
-  githubUrl: string;
+  githubUrl?: string;
+  frontendRepoUrl?: string;
+  backendRepoUrl?: string;
   image: string;
   category: string;
 }
@@ -17,7 +19,9 @@ const ProjectSchema: Schema = new Schema({
   description: { type: String, required: true },
   stack: { type: [String], required: true },
   liveUrl: { type: String, required: true },
-  githubUrl: { type: String, required: true },
+  githubUrl: { type: String, required: false },
+  frontendRepoUrl: { type: String, required: false },
+  backendRepoUrl: { type: String, required: false },
   image: { type: String, required: true },
   category: { type: String, required: true },
 }, {

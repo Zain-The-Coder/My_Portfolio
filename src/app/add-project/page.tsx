@@ -12,7 +12,9 @@ const projectSchema = z.object({
   description: z.string().min(10, "Description must be at least 10 characters"),
   stack: z.string().min(2, "Tech stack is required (comma separated)"),
   liveUrl: z.string().url("Must be a valid URL"),
-  githubUrl: z.string().url("Must be a valid URL"),
+  githubUrl: z.string().url("Must be a valid URL").or(z.literal("")).optional(),
+  frontendRepoUrl: z.string().url("Must be a valid URL").or(z.literal("")).optional(),
+  backendRepoUrl: z.string().url("Must be a valid URL").or(z.literal("")).optional(),
   category: z.string().min(2, "Category is required"),
   image: z.string().optional(),
 });
@@ -23,6 +25,7 @@ export default function AddProjectPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [repoType, setRepoType] = useState<"single" | "separate" | "none">("single");
 
   const {
     register,
@@ -38,6 +41,17 @@ export default function AddProjectPage() {
     if (data.secret !== "9509") {
       setSubmitError("Invalid PIN.");
       return;
+    }
+
+    if (repoType === "single") {
+      data.frontendRepoUrl = undefined;
+      data.backendRepoUrl = undefined;
+    } else if (repoType === "separate") {
+      data.githubUrl = undefined;
+    } else {
+      data.githubUrl = undefined;
+      data.frontendRepoUrl = undefined;
+      data.backendRepoUrl = undefined;
     }
 
     setIsSubmitting(true);
@@ -162,15 +176,82 @@ export default function AddProjectPage() {
                   />
                   {errors.liveUrl && <p className="text-red-400 text-xs mt-1">{errors.liveUrl.message}</p>}
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-foreground/80">GitHub URL</label>
-                  <input
-                    {...register("githubUrl")}
-                    className="w-full bg-surface/50 border border-border/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
-                    placeholder="https://github.com/..."
-                  />
-                  {errors.githubUrl && <p className="text-red-400 text-xs mt-1">{errors.githubUrl.message}</p>}
+              </div>
+
+              {/* Repo Links Sub-section */}
+              <div className="p-4 border border-border/50 rounded-lg bg-surface/30">
+                <label className="block text-sm font-medium mb-3 text-foreground/80">Repository Links</label>
+                
+                <div className="flex flex-wrap gap-4 mb-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="repoType" 
+                      value="single" 
+                      checked={repoType === "single"} 
+                      onChange={() => setRepoType("single")} 
+                      className="text-primary-500 focus:ring-primary-500"
+                    />
+                    <span className="text-sm">Single Repo</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="repoType" 
+                      value="separate" 
+                      checked={repoType === "separate"} 
+                      onChange={() => setRepoType("separate")} 
+                      className="text-primary-500 focus:ring-primary-500"
+                    />
+                    <span className="text-sm">Separate Frontend/Backend</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="repoType" 
+                      value="none" 
+                      checked={repoType === "none"} 
+                      onChange={() => setRepoType("none")} 
+                      className="text-primary-500 focus:ring-primary-500"
+                    />
+                    <span className="text-sm">No Repo Links</span>
+                  </label>
                 </div>
+
+                {repoType === "single" && (
+                  <div>
+                    <label className="block text-xs font-medium mb-1 text-foreground/70">GitHub URL</label>
+                    <input
+                      {...register("githubUrl")}
+                      className="w-full bg-surface/50 border border-border/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                      placeholder="https://github.com/..."
+                    />
+                    {errors.githubUrl && <p className="text-red-400 text-xs mt-1">{errors.githubUrl.message}</p>}
+                  </div>
+                )}
+
+                {repoType === "separate" && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-medium mb-1 text-foreground/70">Frontend Repo URL</label>
+                      <input
+                        {...register("frontendRepoUrl")}
+                        className="w-full bg-surface/50 border border-border/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                        placeholder="https://github.com/.../frontend"
+                      />
+                      {errors.frontendRepoUrl && <p className="text-red-400 text-xs mt-1">{errors.frontendRepoUrl.message}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium mb-1 text-foreground/70">Backend Repo URL</label>
+                      <input
+                        {...register("backendRepoUrl")}
+                        className="w-full bg-surface/50 border border-border/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                        placeholder="https://github.com/.../backend"
+                      />
+                      {errors.backendRepoUrl && <p className="text-red-400 text-xs mt-1">{errors.backendRepoUrl.message}</p>}
+                    </div>
+                  </div>
+                )}
               </div>
               
               <div>

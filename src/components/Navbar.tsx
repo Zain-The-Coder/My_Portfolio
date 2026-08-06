@@ -48,9 +48,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-          isScrolled ? "py-4 glass shadow-lg" : "py-6 bg-transparent"
-        }`}
+        className={`absolute top-0 left-0 w-full z-[100] transition-all duration-300 py-6 bg-transparent`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <a href="#home" className="text-2xl font-bold font-space-grotesk tracking-tighter">
