@@ -17,7 +17,6 @@ const navLinks = [
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
@@ -25,8 +24,6 @@ export default function Navbar() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
       // Simple active section logic
       const sections = navLinks.map(link => link.href.substring(1));
       let current = "home";
@@ -79,7 +76,7 @@ export default function Navbar() {
               {theme === "dark" ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
             <a
-              href="/resume.pdf"
+              href="/Zain_Ur-Rehman(1)(1).pdf"
               download
               className="px-5 py-2 text-sm font-medium rounded-lg bg-primary-500/10 text-primary-500 border border-primary-500/20 hover:bg-primary-500 hover:text-white transition-all"
             >
@@ -128,7 +125,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="/resume.pdf"
+                href="/Zain_Ur-Rehman(1)(1).pdf"
                 download
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="mt-4 px-6 py-3 mx-auto max-w-xs w-full text-center rounded-lg bg-primary-500 text-white font-medium"

@@ -129,7 +129,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <a href="/resume.pdf" download className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
+            <a href="/Zain_Ur-Rehman(1)(1).pdf" download className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
               Download Resume
             </a>
           </motion.div>
