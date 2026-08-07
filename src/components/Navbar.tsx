@@ -15,6 +15,8 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  //nav bar sec
+  //hello
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
