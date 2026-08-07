@@ -2,8 +2,97 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { IProject } from "@/models/Project";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { FaCode } from "react-icons/fa";
+
+function ProjectCard({ project, index }: { project: IProject; index: number }) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group glass rounded-2xl overflow-hidden flex flex-col border border-white/10 hover:border-primary-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-all duration-300 hover:-translate-y-2 relative bg-surface/50"
+    >
+      {/* Image Container */}
+      <div className="relative w-full pt-[56.25%] overflow-hidden bg-surface-elevated rounded-t-2xl">
+        {/* Fallback Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-900/30 to-secondary-900/30 flex items-center justify-center text-foreground/50 z-0">
+          <FaCode size={48} className="opacity-20" />
+        </div>
+        
+        {/* Actual Image */}
+        {!imgError && project.image && (project.image.startsWith('/') || project.image.startsWith('http')) && (
+          <Image 
+            src={project.image} 
+            alt={project.title} 
+            fill 
+            className="object-cover transition-transform duration-500 group-hover:scale-105 z-10" 
+            onError={() => setImgError(true)}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        )}
+        
+        {/* Gradient Overlay for smooth blend */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background/90 to-transparent z-20 pointer-events-none"></div>
+      </div>
+
+      {/* Content */}
+      <div className="p-8 pt-4 flex flex-col flex-grow relative z-30">
+        <div className="mb-4">
+          <span className="inline-block px-3 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full bg-secondary-500/10 text-secondary-400 border border-secondary-500/20">
+            {project.category}
+          </span>
+        </div>
+        
+        <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">{project.title}</h3>
+        
+        <p className="text-foreground/70 mb-6 text-sm leading-relaxed flex-grow line-clamp-3">
+          {project.description}
+        </p>
+        
+        <div className="flex flex-wrap gap-2 mb-8">
+          {project.stack.map(tech => (
+            <span key={tech} className="px-3 py-1 text-xs font-medium rounded-full bg-surface-elevated/80 text-foreground/80 border border-white/5">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Action Buttons (Always Visible) */}
+        <div className="flex flex-wrap items-center gap-3 mt-auto pt-4 border-t border-white/5">
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 flex items-center gap-2 bg-primary-600 rounded-xl text-white text-sm font-medium hover:bg-primary-500 transition-colors shadow-lg shadow-primary-500/20 active:scale-95">
+              <FiExternalLink size={16} /> Live Demo
+            </a>
+          )}
+          
+          {project.githubUrl && (
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 flex items-center gap-2 bg-surface rounded-xl text-foreground text-sm font-medium hover:bg-white/10 transition-colors border border-white/10 active:scale-95">
+              <FiGithub size={16} /> GitHub
+            </a>
+          )}
+
+          {project.frontendRepoUrl && (
+            <a href={project.frontendRepoUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-xl text-foreground text-xs font-medium hover:bg-white/10 transition-colors border border-white/10 active:scale-95">
+              <FiGithub size={14} /> Frontend
+            </a>
+          )}
+
+          {project.backendRepoUrl && (
+            <a href={project.backendRepoUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-xl text-foreground text-xs font-medium hover:bg-white/10 transition-colors border border-white/10 active:scale-95">
+              <FiGithub size={14} /> Backend
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function ProjectsSection() {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -51,67 +140,7 @@ export default function ProjectsSection() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {projects.map((project, index) => (
-              <motion.div
-                key={project.id || index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group glass rounded-2xl overflow-hidden flex flex-col border border-white/5 hover:border-primary-500/50 transition-all duration-300 hover:-translate-y-2 shadow-lg"
-              >
-                {/* Image Container */}
-                <div className="relative w-full pt-[56.25%] overflow-hidden bg-surface-elevated">
-                  {/* Fallback pattern if image is not ready yet */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-900/40 to-secondary-900/40 flex items-center justify-center text-foreground/50 z-0">
-                    <span className="font-mono text-sm tracking-widest uppercase">{project.title} mockup</span>
-                  </div>
-                  
-                  {/* <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110 z-10" /> */}
-                  
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-wrap items-center justify-center gap-3 p-4">
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-primary-500 rounded-full text-white text-sm font-medium hover:bg-primary-600 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-75">
-                      <FiExternalLink size={16} /> Live Demo
-                    </a>
-                    
-                    {project.githubUrl && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-full text-foreground text-sm font-medium hover:bg-white/20 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-100">
-                        <FiGithub size={16} /> GitHub
-                      </a>
-                    )}
-
-                    {project.frontendRepoUrl && (
-                      <a href={project.frontendRepoUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-full text-foreground text-sm font-medium hover:bg-white/20 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-125">
-                        <FiGithub size={16} /> Frontend Repo
-                      </a>
-                    )}
-
-                    {project.backendRepoUrl && (
-                      <a href={project.backendRepoUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 flex items-center gap-2 bg-surface rounded-full text-foreground text-sm font-medium hover:bg-white/20 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-300 delay-150">
-                        <FiGithub size={16} /> Backend Repo
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-8 flex flex-col flex-grow">
-                  <p className="text-secondary-500 text-sm font-semibold tracking-wider uppercase mb-2">
-                    {project.category}
-                  </p>
-                  <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
-                  <p className="text-foreground/70 mb-6 text-sm leading-relaxed flex-grow">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.stack.map(tech => (
-                      <span key={tech} className="px-3 py-1 text-xs font-medium rounded-full bg-primary-500/10 text-primary-400 border border-primary-500/20">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+              <ProjectCard key={project.id || index} project={project} index={index} />
             ))}
           </div>
         )}
