@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationCircle, FaSpinner, FaUpload } from "react-icons/fa";
 
 const projectSchema = z.object({
   secret: z.string().min(1, "PIN is required"),
@@ -26,6 +26,9 @@ export default function AddProjectPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [repoType, setRepoType] = useState<"single" | "separate" | "none">("single");
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
   const {
     register,
@@ -34,7 +37,55 @@ export default function AddProjectPage() {
     formState: { errors },
   } = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
+    defaultValues: {
+      image: ""
+    }
   });
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImageUploadError("");
+
+    // Client-side validation
+    const validTypes = ["image/jpeg", "image/png", "image/webp"];
+    if (!validTypes.includes(file.type)) {
+      setImageUploadError("Invalid file type. Only JPG, PNG, and WebP are allowed.");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) { // 5MB
+      setImageUploadError("File is too large. Max size is 5MB.");
+      return;
+    }
+
+    setIsUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to upload image");
+
+      setUploadedImageUrl(data.url);
+      // We don't automatically set the form value here if we want to rely on the hidden input or state,
+      // but let's just keep track of it in state and inject it during onSubmit.
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setImageUploadError(err.message || "Something went wrong uploading.");
+      } else {
+        setImageUploadError("Something went wrong uploading.");
+      }
+    } finally {
+      setIsUploadingImage(false);
+    }
+  };
 
   const onSubmit = async (data: ProjectFormValues) => {
     // 1. Frontend UX Gate (Hardcoded PIN check)
@@ -52,6 +103,10 @@ export default function AddProjectPage() {
       data.githubUrl = undefined;
       data.frontendRepoUrl = undefined;
       data.backendRepoUrl = undefined;
+    }
+
+    if (uploadedImageUrl) {
+      data.image = uploadedImageUrl;
     }
 
     setIsSubmitting(true);
@@ -254,13 +309,45 @@ export default function AddProjectPage() {
                 )}
               </div>
               
-              <div>
-                <label className="block text-sm font-medium mb-1 text-foreground/80">Image URL (Optional)</label>
-                <input
-                  {...register("image")}
-                  className="w-full bg-surface/50 border border-border/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
-                  placeholder="e.g. /projects/my-project.jpg"
-                />
+              <div className="p-4 border border-border/50 rounded-lg bg-surface/30">
+                <label className="block text-sm font-medium mb-3 text-foreground/80">Project Image</label>
+                <div className="flex flex-col gap-4">
+                  {uploadedImageUrl ? (
+                    <div className="relative w-full h-48 rounded-lg overflow-hidden border border-border/50">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={uploadedImageUrl} alt="Uploaded project" className="w-full h-full object-cover" />
+                      <button 
+                        type="button" 
+                        onClick={() => setUploadedImageUrl("")}
+                        className="absolute top-2 right-2 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-lg hover:bg-red-600 transition-colors"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <input 
+                        type="file" 
+                        accept="image/jpeg, image/png, image/webp" 
+                        onChange={handleImageUpload}
+                        disabled={isUploadingImage}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
+                      />
+                      <div className={`w-full border-2 border-dashed ${imageUploadError ? 'border-red-400/50 bg-red-400/5' : 'border-border/50 bg-surface/30 hover:bg-surface/50'} rounded-lg p-8 flex flex-col items-center justify-center text-center transition-colors`}>
+                        {isUploadingImage ? (
+                          <FaSpinner className="animate-spin text-primary-500 mb-2" size={24} />
+                        ) : (
+                          <FaUpload className="text-foreground/50 mb-2" size={24} />
+                        )}
+                        <p className="text-sm font-medium text-foreground/80">
+                          {isUploadingImage ? "Uploading to ImageKit..." : "Click or drag image to upload"}
+                        </p>
+                        <p className="text-xs text-foreground/50 mt-1">JPG, PNG, WebP up to 5MB</p>
+                      </div>
+                    </div>
+                  )}
+                  {imageUploadError && <p className="text-red-400 text-xs">{imageUploadError}</p>}
+                </div>
               </div>
             </div>
 

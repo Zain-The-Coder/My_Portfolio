@@ -15,6 +15,7 @@ export default function SplashAnimation() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
