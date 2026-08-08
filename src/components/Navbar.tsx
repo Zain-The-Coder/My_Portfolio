@@ -78,8 +78,9 @@ export default function Navbar() {
               {theme === "dark" ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
             <a
-              href="/Zain_Ur-Rehman(1)(1).pdf"
-              download
+              href="https://drive.google.com/file/d/1-G5i4vcP5T_Bw0_7DUHdCbYV5UzO5f1U/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-5 py-2 text-sm font-medium rounded-lg bg-primary-500/10 text-primary-500 border border-primary-500/20 hover:bg-primary-500 hover:text-white transition-all"
             >
               Resume
@@ -127,12 +128,13 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="/Zain_Ur-Rehman(1)(1).pdf"
-                download
+                href="https://drive.google.com/file/d/1-G5i4vcP5T_Bw0_7DUHdCbYV5UzO5f1U/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="mt-4 px-6 py-3 mx-auto max-w-xs w-full text-center rounded-lg bg-primary-500 text-white font-medium"
               >
-                Download Resume
+                View Resume
               </a>
             </nav>
           </motion.div>

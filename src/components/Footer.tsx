@@ -33,7 +33,7 @@ export default function Footer() {
               <a href="https://github.com/Zain-The-Coder" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-surface hover:bg-primary-500 hover:text-white transition-colors border border-border/50">
                 <SiGithub size={18} />
               </a>
-              <a href="#" className="p-2 rounded-full bg-surface hover:bg-primary-500 hover:text-white transition-colors border border-border/50">
+              <a href="https://www.linkedin.com/in/hafiz-zain-022680354/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-surface hover:bg-primary-500 hover:text-white transition-colors border border-border/50">
                 <FaLinkedin size={18} />
               </a>
             </div>

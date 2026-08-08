@@ -4,7 +4,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { FaCheckCircle, FaExclamationCircle, FaSpinner, FaUpload } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationCircle, FaSpinner, FaUpload, FaLink, FaCopy } from "react-icons/fa";
+import { useEffect } from "react";
+import { IProject } from "@/models/Project";
 
 const projectSchema = z.object({
   secret: z.string().min(1, "PIN is required"),
@@ -30,10 +32,74 @@ export default function AddProjectPage() {
   const [imageUploadError, setImageUploadError] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
+  // Token Generator State
+  const [projects, setProjects] = useState<IProject[]>([]);
+  const [clientName, setClientName] = useState("");
+  const [tokenProjectId, setTokenProjectId] = useState("");
+  const [generatedLink, setGeneratedLink] = useState("");
+  const [isGeneratingToken, setIsGeneratingToken] = useState(false);
+  const [tokenError, setTokenError] = useState("");
+
+  useEffect(() => {
+    fetch('/api/projects').then(res => res.json()).then(data => {
+      if (Array.isArray(data)) setProjects(data);
+    }).catch(console.error);
+  }, []);
+
+  const handleGenerateToken = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setTokenError("");
+    setGeneratedLink("");
+    
+    // We get the secret from the main form using getValues()
+    const currentSecret = getValues("secret");
+    if (!currentSecret) {
+      setTokenError("Please enter the Admin PIN at the top first.");
+      return;
+    }
+
+    if (!clientName || !tokenProjectId) {
+      setTokenError("Please fill out both fields.");
+      return;
+    }
+
+    const selectedProject = projects.find(p => p.id === tokenProjectId);
+    if (!selectedProject) return;
+
+    setIsGeneratingToken(true);
+    try {
+      const res = await fetch('/api/tokens', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret: currentSecret,
+          clientName,
+          projectId: selectedProject.id,
+          projectName: selectedProject.title
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to generate token");
+
+      const link = `${window.location.origin}/feedback?token=${data.token}`;
+      setGeneratedLink(link);
+      setClientName("");
+      setTokenProjectId("");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setTokenError(err.message || "Failed to generate");
+      }
+    } finally {
+      setIsGeneratingToken(false);
+    }
+  };
+
   const {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
@@ -367,6 +433,80 @@ export default function AddProjectPage() {
             </button>
           </form>
         )}
+
+        {/* Token Generator Section */}
+        <div className="mt-12 glass p-8 md:p-10 rounded-2xl border border-white/5 shadow-2xl">
+          <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
+            <FaLink className="text-primary-500" /> Generate Feedback Link
+          </h2>
+          <p className="text-foreground/70 text-sm mb-6">
+            Create a unique, one-time link for a client to submit a verified review. Make sure you entered the Admin PIN above.
+          </p>
+
+          <form onSubmit={handleGenerateToken} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1 text-foreground/80">Client Name</label>
+                <input
+                  value={clientName}
+                  onChange={(e) => setClientName(e.target.value)}
+                  className="w-full bg-surface/50 border border-border/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                  placeholder="e.g. John Doe"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-foreground/80">Project</label>
+                <select
+                  value={tokenProjectId}
+                  onChange={(e) => setTokenProjectId(e.target.value)}
+                  className="w-full bg-surface/50 text-white bg-[#16161b] border border-border/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 appearance-none"
+                >
+                  <option value="">Select a project...</option>
+                  {projects.map(p => (
+                    <option key={p.id} value={p.id}>{p.title}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {tokenError && (
+              <div className="text-red-400 text-sm mt-2">{tokenError}</div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isGeneratingToken || !clientName || !tokenProjectId}
+              className="w-full py-3 bg-surface-elevated/80 border border-primary-500/30 text-primary-400 hover:bg-primary-500/10 rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isGeneratingToken ? "Generating..." : "Generate Link"}
+            </button>
+          </form>
+
+          {generatedLink && (
+            <div className="mt-6 p-4 bg-primary-500/10 border border-primary-500/30 rounded-lg flex flex-col gap-2 relative">
+              <span className="text-xs text-primary-400 font-bold uppercase tracking-wider">Unique Link Generated! (Valid for 14 days)</span>
+              <div className="flex gap-2 items-center">
+                <input 
+                  type="text" 
+                  readOnly 
+                  value={generatedLink}
+                  className="flex-grow bg-surface/80 border border-border/50 rounded p-2 text-sm text-foreground focus:outline-none"
+                />
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedLink);
+                    alert("Copied to clipboard!");
+                  }}
+                  className="p-2 bg-primary-500 text-white rounded hover:bg-primary-600 transition-colors"
+                  title="Copy to clipboard"
+                >
+                  <FaCopy />
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
       </div>
     </div>
   );

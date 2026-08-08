@@ -7,6 +7,9 @@ export interface IReview extends Document {
   rating: number;
   comment: string;
   date: string;
+  clientPhoto?: string;
+  designation?: string;
+  status: 'approved' | 'hidden' | 'pending';
 }
 
 const ReviewSchema: Schema = new Schema({
@@ -16,6 +19,9 @@ const ReviewSchema: Schema = new Schema({
   rating: { type: Number, required: true, min: 1, max: 5 },
   comment: { type: String, required: true },
   date: { type: String, required: true },
+  clientPhoto: { type: String },
+  designation: { type: String },
+  status: { type: String, enum: ['approved', 'hidden', 'pending'], default: 'approved' },
 }, {
   timestamps: true,
 });

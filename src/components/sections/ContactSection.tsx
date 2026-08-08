@@ -123,14 +123,14 @@ export default function ContactSection() {
                 <a href="https://github.com/Zain-The-Coder" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface-elevated flex items-center justify-center text-foreground hover:bg-primary-500 hover:text-white transition-colors border border-border/50">
                   <SiGithub size={18} />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-surface-elevated flex items-center justify-center text-foreground hover:bg-primary-500 hover:text-white transition-colors border border-border/50">
+                <a href="https://www.linkedin.com/in/hafiz-zain-022680354/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface-elevated flex items-center justify-center text-foreground hover:bg-primary-500 hover:text-white transition-colors border border-border/50">
                   <FaLinkedin size={18} />
                 </a>
               </div>
             </div>
 
-            <a href="/Zain_Ur-Rehman(1)(1).pdf" download className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
-              Download Resume
+            <a href="https://drive.google.com/file/d/1-G5i4vcP5T_Bw0_7DUHdCbYV5UzO5f1U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
+              View Resume
             </a>
           </motion.div>
 
