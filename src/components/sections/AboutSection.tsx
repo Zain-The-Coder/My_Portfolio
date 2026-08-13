@@ -122,9 +122,9 @@ export default function AboutSection() {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
               {[
-                { label: "Projects Built", value: 5, suffix: "+" },
+                { label: "Projects Built", value: 15, suffix: "+" },
                 { label: "Years Experience", value: 2, suffix: "+" },
-                { label: "Technologies", value: 15, suffix: "+" },
+                { label: "Technologies", value: 20, suffix: "+" },
                 { label: "Cups of Coffee", value: 500, suffix: "+" },
               ].map((stat, i) => (
                 <div key={i} className="glass p-4 rounded-xl text-center border border-white/5">
