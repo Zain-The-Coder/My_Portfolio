@@ -7,9 +7,10 @@ import { MdEmail, MdLocationOn } from "react-icons/md";
 
 const roles = [
   "MERN Stack Developer",
-  "Full-Stack JavaScript Engineer",
+  "Full-Stack AI Engineer",
   "React.js & Next.js Expert",
-  "Node.js Backend Developer",
+  "Generative AI Engineer" ,
+  "Node.js and Python Backend Developer",
 ];
 
 export default function HeroSection() {

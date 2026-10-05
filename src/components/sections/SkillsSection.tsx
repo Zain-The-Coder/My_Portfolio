@@ -23,17 +23,19 @@ export default function SkillsSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, catIndex) => (
+          {skillCategories.map((category, catIndex) => {
+            const isAI = category.title === "AI / Generative AI";
+            return (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: catIndex * 0.1 }}
-              className="glass p-6 rounded-2xl flex flex-col h-full border border-white/5 hover:border-primary-500/30 transition-colors duration-300 group"
+              className={`glass p-6 rounded-2xl flex flex-col h-full border transition-all duration-300 group ${isAI ? 'border-primary-500/40 shadow-[0_0_15px_rgba(139,92,246,0.1)] hover:shadow-[0_0_25px_rgba(139,92,246,0.2)] bg-primary-500/5 hover:border-primary-500/60' : 'border-white/5 hover:border-primary-500/30'}`}
             >
               <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                <span className="w-8 h-1 bg-primary-500 rounded-full group-hover:w-12 transition-all duration-300"></span>
+                <span className={`h-1 rounded-full group-hover:w-12 transition-all duration-300 ${isAI ? 'w-10 bg-gradient-to-r from-primary-500 to-secondary-500' : 'w-8 bg-primary-500'}`}></span>
                 {category.title}
               </h3>
               
@@ -53,7 +55,8 @@ export default function SkillsSection() {
                 })}
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
 
       </div>

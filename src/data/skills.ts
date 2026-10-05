@@ -4,9 +4,9 @@ import {
   SiNodedotjs, SiExpress, SiSocketdotio, 
   SiMongodb, SiPostgresql, SiPrisma, SiSupabase, SiFirebase, SiRedis,
   SiJsonwebtokens, SiDocker, SiVercel, SiRailway, SiRender,
-  SiGit, SiGithub, SiPostman
+  SiGit, SiGithub, SiPostman, SiFastapi, SiHuggingface
 } from 'react-icons/si';
-import { FaCss3Alt, FaProjectDiagram, FaAws } from 'react-icons/fa';
+import { FaCss3Alt, FaProjectDiagram, FaAws, FaRobot, FaBrain, FaNetworkWired, FaMagic, FaCubes, FaDatabase, FaVectorSquare } from 'react-icons/fa';
 
 import { IconType } from 'react-icons';
 
@@ -21,6 +21,23 @@ export interface SkillCategory {
 }
 
 export const skillCategories: SkillCategory[] = [
+  {
+    title: "AI / Generative AI",
+    skills: [
+      { name: "Generative AI", icon: FaBrain },
+      { name: "LangChain", icon: FaProjectDiagram },
+      { name: "RAG", icon: FaNetworkWired },
+      { name: "Prompt Engineering", icon: FaMagic },
+      { name: "LLM Integration", icon: FaCubes },
+      { name: "AI Agents", icon: FaRobot },
+      { name: "Vector Databases", icon: FaDatabase },
+      { name: "Embeddings", icon: FaVectorSquare },
+      { name: "FastAPI", icon: SiFastapi },
+      { name: "ChromaDB", icon: FaDatabase },
+      { name: "Hugging Face", icon: SiHuggingface },
+      { name: "OpenAI API", icon: FaRobot },
+    ]
+  },
   {
     title: "Languages",
     skills: [
