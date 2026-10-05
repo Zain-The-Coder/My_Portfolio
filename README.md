@@ -32,10 +32,3 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🔐 Hidden Admin Route (Add Projects)
-
-To add new projects without touching the codebase, navigate to the hidden route:
-`http://localhost:3000/add-project`
-
-This page is not linked anywhere on the site and is hidden from search engines. 
-**To submit a project, you must enter the frontend PIN `9509`.** This acts as a first-layer UX gate. The backend will then independently verify this request using the `ADD_PROJECT_SECRET` environment variable to ensure true security.
