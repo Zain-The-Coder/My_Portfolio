@@ -64,6 +64,7 @@
   --surface: var(--color-light-surface);
   --surface-elevated: var(--color-light-surface-elevated);
   --border: #e2e8f0;
+  --grid-color: rgba(0, 0, 0, 0.05);
 }
 
 :root[data-theme="dark"] {
@@ -72,10 +73,15 @@
   --surface: var(--color-dark-surface);
   --surface-elevated: var(--color-dark-surface-elevated);
   --border: #1e293b;
+  --grid-color: rgba(255, 255, 255, 0.05);
 }
 
 body {
   background-color: var(--background);
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
