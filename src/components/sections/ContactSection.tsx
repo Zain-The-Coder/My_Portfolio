@@ -88,13 +88,13 @@ export default function ContactSection() {
             <div>
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-6 mb-8">
-                <a href="mailto:zain015976@gmail.com" className="flex items-center gap-4 text-foreground/80 hover:text-primary-500 transition-colors group">
+                <a href="mailto:hafizzain.mail@gmail.com" className="flex items-center gap-4 text-foreground/80 hover:text-primary-500 transition-colors group">
                   <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-secondary-500 group-hover:bg-primary-500 group-hover:text-white transition-all">
                     <MdEmail size={20} />
                   </div>
                   <div>
                     <p className="text-sm text-foreground/50">Email</p>
-                    <p className="font-medium">zain015976@gmail.com</p>
+                    <p className="font-medium">hafizzain.mail@gmail.com</p>
                   </div>
                 </a>
                 
@@ -129,7 +129,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <a href="https://drive.google.com/file/d/1-G5i4vcP5T_Bw0_7DUHdCbYV5UzO5f1U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
+            <a href="https://drive.google.com/file/d/1WGOtTnH3XHnlYUze8UtdilpaWOarIqTR/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
               View Resume
             </a>
           </motion.div>

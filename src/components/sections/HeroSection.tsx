@@ -124,7 +124,7 @@ export default function HeroSection() {
             <SiGithub size={24} />
           </a>
           <a
-            href="mailto:zain015976@gmail.com"
+            href="mailto:hafizzain.mail@gmail.com"
             className="p-3 rounded-full glass hover:bg-white/10 dark:hover:bg-white/5 transition-colors text-foreground/80 hover:text-secondary-500"
             aria-label="Email"
           >

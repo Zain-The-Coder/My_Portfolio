@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>', // Use onboarding domain or your verified domain
-      to: ['zain015976@gmail.com'],
+      to: ['hafizzain.mail@gmail.com'],
       replyTo: email,
       subject: `New Portfolio Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
