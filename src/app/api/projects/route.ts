@@ -6,10 +6,10 @@ export async function GET() {
   try {
     await connectToDatabase();
     
-    // Fetch all projects
-    const projects = await Project.find({}).sort({ createdAt: 1 }); // Sort by creation or however preferred
-    
+    const projects = await Project.find().sort({ displayOrder: 1 }); 
+
     return NextResponse.json(projects);
+    
   } catch (error) {
     console.error('Failed to fetch projects:', error);
     return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });
