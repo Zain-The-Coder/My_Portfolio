@@ -24,18 +24,12 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "AI / Generative AI",
     skills: [
-      { name: "Generative AI", icon: FaBrain },
-      { name: "LangChain", icon: FaProjectDiagram },
       { name: "RAG", icon: FaNetworkWired },
       { name: "Prompt Engineering", icon: FaMagic },
+      { name: "LangChain", icon: FaProjectDiagram },
       { name: "LLM Integration", icon: FaCubes },
-      { name: "AI Agents", icon: FaRobot },
       { name: "Vector Databases", icon: FaDatabase },
-      { name: "Embeddings", icon: FaVectorSquare },
       { name: "FastAPI", icon: SiFastapi },
-      { name: "ChromaDB", icon: FaDatabase },
-      { name: "Hugging Face", icon: SiHuggingface },
-      { name: "OpenAI API", icon: FaRobot },
     ]
   },
   {
