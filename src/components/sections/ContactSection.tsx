@@ -129,7 +129,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <a href="https://drive.google.com/file/d/1WGOtTnH3XHnlYUze8UtdilpaWOarIqTR/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
+            <a href="https://drive.google.com/file/d/1deMeERxUSn4hZvkGUbJ0w4DJEMv0SUOy/view" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-500 text-primary-500 font-bold hover:bg-primary-500 hover:text-white transition-colors w-fit">
               View Resume
             </a>
           </motion.div>

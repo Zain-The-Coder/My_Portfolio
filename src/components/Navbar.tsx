@@ -8,6 +8,7 @@ import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
+  { name: "Experience", href: "#experience" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Rate Me", href: "#rate-me" },
@@ -78,12 +79,12 @@ export default function Navbar() {
               {theme === "dark" ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
             <a
-              href="https://drive.google.com/file/d/1WGOtTnH3XHnlYUze8UtdilpaWOarIqTR/view?usp=sharing"
+              href="https://drive.google.com/file/d/1deMeERxUSn4hZvkGUbJ0w4DJEMv0SUOy/view"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2 text-sm font-medium rounded-lg bg-primary-500/10 text-primary-500 border border-primary-500/20 hover:bg-primary-500 hover:text-white transition-all"
             >
-              Resume
+              View Resume
             </a>
           </div>
 
@@ -128,7 +129,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="https://drive.google.com/file/d/1WGOtTnH3XHnlYUze8UtdilpaWOarIqTR/view?usp=sharing"
+                href="https://drive.google.com/file/d/1deMeERxUSn4hZvkGUbJ0w4DJEMv0SUOy/view"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}

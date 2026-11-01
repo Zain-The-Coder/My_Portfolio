@@ -4,9 +4,9 @@ import {
   SiNodedotjs, SiExpress, SiSocketdotio, 
   SiMongodb, SiPostgresql, SiPrisma, SiSupabase, SiFirebase, SiRedis,
   SiJsonwebtokens, SiDocker, SiVercel, SiRailway, SiRender,
-  SiGit, SiGithub, SiPostman, SiFastapi, SiHuggingface
+  SiGit, SiGithub, SiPostman, SiFastapi
 } from 'react-icons/si';
-import { FaCss3Alt, FaProjectDiagram, FaAws, FaRobot, FaBrain, FaNetworkWired, FaMagic, FaCubes, FaDatabase, FaVectorSquare } from 'react-icons/fa';
+import { FaCss3Alt, FaProjectDiagram, FaAws, FaNetworkWired, FaMagic, FaCubes, FaDatabase } from 'react-icons/fa';
 
 import { IconType } from 'react-icons';
 
