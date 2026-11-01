@@ -42,16 +42,19 @@ export default function ContactSection() {
         body: JSON.stringify(data),
       });
 
+      const resData = await res.json().catch(() => null);
+
       if (!res.ok) {
-        throw new Error("Failed to send message");
+        throw new Error(resData?.error || "Failed to send message");
       }
 
       setIsSuccess(true);
       reset();
       
       setTimeout(() => setIsSuccess(false), 5000);
-    } catch {
-      setSubmitError("Something went wrong, please try again or email me directly.");
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : "Something went wrong, please try again or email me directly.";
+      setSubmitError(errorMsg);
     } finally {
       setIsSubmitting(false);
     }

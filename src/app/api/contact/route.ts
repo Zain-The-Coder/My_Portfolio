@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key_for_build');
-
 export async function POST(req: Request) {
   try {
     const { name, email, message } = await req.json();
@@ -11,15 +9,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    if (!process.env.RESEND_API_KEY) {
-      // For local development without API key, just simulate success
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
       console.log('Simulating email send (no API key):', { name, email, message });
       return NextResponse.json({ success: true, simulated: true });
     }
 
+    const resend = new Resend(apiKey);
+    const recipient = process.env.CONTACT_RECEIVER_EMAIL || 'hafizzain.mail@gmail.com';
+
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Use onboarding domain or your verified domain
-      to: ['hafizzain.mail@gmail.com'],
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: [recipient],
       replyTo: email,
       subject: `New Portfolio Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
